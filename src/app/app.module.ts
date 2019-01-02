@@ -10,16 +10,19 @@ import { HttpClientModule } from '@angular/common/http'; // Para la conexion con
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Para el uso de formularios
 
 // SERVICIOS
-import { HttpService } from './http.service';
+import { HttpService } from './servicios/http.service';
+import { GlobalService } from './servicios/global.service';
 
 // COMPONENTES
 import { LoginComponent } from './componentes/login/login.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // COMPONENTES
-    LoginComponent
+    LoginComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { LoginComponent } from './componentes/login/login.component';
   ],
   providers: [
     // SERVICIOS GLOBALES
-    HttpService
+    HttpService,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })

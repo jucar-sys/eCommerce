@@ -4,6 +4,11 @@
     padding-top: 10rem;
 }
 
+label {
+    font-size: 2rem;
+    color: aliceblue;
+}
+
 .form-control{
     color: aliceblue;
     background-color: rgba(0, 0, 0, .6)!important;
