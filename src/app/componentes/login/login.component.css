@@ -1,0 +1,20 @@
+.contenedorLogin{
+    margin: 0 auto;
+    width: 30%;
+    padding-top: 10rem;
+}
+
+.form-control{
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, .6)!important;
+}
+
+.form-control::-webkit-input-placeholder { color: white; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: white; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
+
+.smallBlanco{
+    color: aliceblue;
+}
