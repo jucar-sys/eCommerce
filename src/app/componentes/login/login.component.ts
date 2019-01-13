@@ -7,6 +7,8 @@ import { GlobalService } from '../../servicios/global.service';
 import { Users } from 'src/app/Users';
 // PARA UTILIZAR EL ENRUTAMIENTO
 import { Router } from '@angular/router';
+// SERVICIOS
+import { HttpService } from '../../servicios/http.service';
 
 @Component({
   selector: 'app-login',
@@ -16,35 +18,41 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public form: FormGroup; // Variable objeto para el uso de formulario
-  userForm: any; // Variable objeto para guardar los datos ingresados del usuario
-  userApi: Users[]; // VAriable objeto para almacenar los usuarios obtenidos del API
 
-  constructor(private globalService: GlobalService, private router: Router) {
+  constructor(
+    private router: Router,
+    public authApi: HttpService) {
     this.form = new FormGroup({
       'email': new FormControl('', Validators.required),
       'password': new FormControl('', Validators.required)
     });
   }
 
-  ngOnInit() {
-    this.globalService.initData(); // Se llama a initData desde el servicio para obtener datos de la base de datos
-  }
+  ngOnInit() { }
 
   onSubmit() {
-    this.userApi = this.globalService.usersApi; // Se inicializa el objeto con lo que se obtuvo de la base de datos
 
     if (this.form.valid) {
-      this.userForm = this.form;
-      // tslint:disable-next-line:forin
-      for (const i in this.userApi) {
-        if (this.userApi[i].email === this.userForm.value.email) {
-          if (this.userApi[i].password === this.userForm.value.password) {
-            this.router.navigate(['inicio']);
-          } else {
-            alert('Contraseña incorrecta');
-          }
+
+      //////////////////////// AUTENTICACIÓN CON FIREBASE ///////////////////////////////
+      this.authApi.loginUser(this.form.value.email, this.form.value.password)
+      .then( (res) => {
+        console.log(res);
+        console.log('BIEN');
+        this.router.navigate(['inicio']);
+      }).catch( (err) => {
+
+        if (err.code === 'auth/user-not-found') {
+          alert('El usuario no existe');
+        } else if (err.code === 'auth/wrong-password') {
+          alert('Contraseña incorrecta');
+        } else {
+          alert(err.message);
         }
-      }
+
+        console.log(err.code + ' -> ' + err.message);
+      });
+      /////////////////////////////////////////////////////////////////////////////////////
     }
   }
 

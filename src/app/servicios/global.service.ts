@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 // SERVICIOS
 import { HttpService } from './http.service';
-// CLASES OBJETO
-import { Users } from '../Users';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +8,6 @@ import { Users } from '../Users';
 export class GlobalService {
 
   ///////////////////// VARIABLES /////////////////////
-
-  usersApi: Users[]; // VAriable para guardar los datos obtenidos del Back-end
 
   /****************************************************/
 
@@ -24,29 +20,28 @@ export class GlobalService {
 
    ///////////////////// FUNCIONES /////////////////////
 
-   initData() {
-    // Obtener usuarios desde API
-    this.httpService.getDatos('users')
-    .subscribe(
-      (data: any) => {
-        this.usersApi = data;
-      },
-      (err) => console.log('Error: ', err)
-    );
-   }
-   /*
-   // Función para obtener usuarios desde API
-   getUsersApi() {
-     this.httpService.getDatos('users')
-      .subscribe(
-        (data: any) => {
-          this.usersApi = data;
-        },
-        (err) => console.log('Error: ', err)
-      );
 
-      return this.usersApi;
-   }*/
+   /****************************************************/
+
+   // Local storage para crear persistencia de datos
+   // Se utilizarán para el globo de notificación del carrito
+
+   // Grabar los datos en el local storage
+   grabarLocalStorage(num, tipo) {
+    num = parseInt(num, 10);
+    if (tipo === 'suma') {
+      num = parseInt(this.obtenerLocalStorage(), 10) + num;
+    } else {
+      num = parseInt(this.obtenerLocalStorage(), 10) - num;
+    }
+    num = num.toString();
+     localStorage.setItem('carritoItems', num);
+   }
+
+   // Obtiene los datos del local storage
+   obtenerLocalStorage() {
+     return localStorage.getItem('carritoItems');
+   }
 
    /****************************************************/
 }

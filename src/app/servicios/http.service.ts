@@ -1,24 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public authFire: AngularFireAuth) { }
 
-  baseURL = 'https://ecommercenu.firebaseio.com/';
+  /////////////////////////// FIREBASE AUTH ///////////////////////////
 
-  // Obtener datos de Firebase
-  getDatos(base) {
-    return this.http.get(`${this.baseURL}${base}.json`);
+  // Registrar usuario
+  registerUser(email: string, pass: string) {
+    return new Promise((resolve, reject) => {
+      this.authFire.auth.createUserWithEmailAndPassword(email, pass)
+      .then( userData => resolve(userData),
+      err => reject (err));
+    });
   }
 
-  // Enviar datos a Firebase
-  sendDatos(datos: any, base) {
-    const data = JSON.stringify(datos);
-    console.log(data);
-    return this.http.put(`${this.baseURL}${base}.json`, data);
+  // Loguear usuario
+  loginUser(email: string, pass: string) {
+    return new Promise((resolve, reject) => {
+      this.authFire.auth.signInWithEmailAndPassword(email, pass)
+      .then( userData => resolve(userData),
+      err => reject (err));
+    });
   }
+
+  // Obtener datos de usuario logueado
+  getAuth() {
+    return this.authFire.authState.subscribe( auth => auth);
+  }
+
+  // Desautenticar usuario
+  logout() {
+    return this.authFire.auth.signOut();
+  }
+
+  ////////////////////////////////////////////////////////////////////
 }

@@ -1,5 +1,45 @@
 <div class="elBody">
   <div class="container">
-      
+    <app-barra-superior></app-barra-superior>
+
+      <div class="card white">
+        <div class="card-content">
+
+          <div class="row">
+            <div class="col-8">
+              <h2>Catálogo de productos</h2>
+            </div>
+            <div class="col-4">
+              <label for="buscador">¿Qué estás buscando?</label>
+              <input class="form-control" type="text" placeholder="Buscar..." id="buscador" [ngModel]="buscar" (ngModelChange)="buscador(buscar=$event)" >
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row main">
+              <ol *ngFor="let item of products | async">
+
+                <li>
+                  <div class="card" style="width: 16rem;">
+                    <img class="card-img-top" src="{{item.img}}" alt="img-Producto">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.nombre}}</h5>
+                      <p class="card-text">Precio: ${{item.precio}}</p>
+                      <p class="card-text">Unidades disponibles: {{item.cantidad}}</p>
+                      <div class="botones-tarjeta">
+                        <a href="#" class="btn btn-primary">Ver mas</a>
+                        <a class="btn btn-warning" (click)="agregarProducto()">Agregar</a>
+                        <input class="form-control spiner" type="number" [(ngModel)]="carrito" name="cantidad" id="cantidad">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+              </ol>
+          </div>
+
+      </div>
+    </div>
   </div>
 </div>
