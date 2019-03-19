@@ -1,6 +1,57 @@
 <div class="elBody">
     <div class="container">
-      <app-barra-superior></app-barra-superior>
-      CARRITO
+        <app-barra-superior></app-barra-superior>
+
+        <div class="card white">
+            <div class="card-content">
+
+                <div class="row">
+                    <h2>Carrito de compras</h2>
+                </div>
+
+                <hr>
+
+                <div class="row main">
+                    <div class="col-8">
+                        <ul *ngFor="let item of productosCarrito">
+
+                            <li>
+                                <div class="card" style="width: 100%;">
+                                    <div class="row" style="padding: 0%">
+                                        <div class="col-3">
+                                            <img class="card-img-top" src="{{item.img}}" alt="img-Producto" style="width: 100%;">
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <h6 class="card-title">{{item.nomb}}</h6>
+                                                        <p class="card-text">Precio: ${{item.pre}}</p>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <p class="card-text">Unidades disponibles: {{item.disp}}</p>
+                                                        <p class="card-text">Unidades solicitadas: {{item.num}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="col-4">
+                        <p style="font-size: 2rem; font-weight: bold;">TOTAL: {{totalPagar}}</p>
+                        <hr>
+                        <a (click)="pagar()" class="btn btn-primary">Pagar</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
-  </div>
+</div>

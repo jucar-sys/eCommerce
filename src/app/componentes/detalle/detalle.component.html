@@ -1,0 +1,37 @@
+<div class="elBody">
+    <div class="container">
+        <app-barra-superior></app-barra-superior>
+
+        <div class="card white">
+            <div class="card-content">
+
+                <div class="row">
+                    <h2>{{detProd[1]}}</h2>
+                </div>
+
+                <hr>
+
+                <div class="row main">
+
+                    <div class="card" style="width: 100%;">
+                        <div class="row" style="padding: 0%">
+                            <div class="col-7">
+                                <img class="card-img-top" src="{{detProd[0]}}" alt="img-Producto" style="width: 80%;">
+                            </div>
+                            <div class="col-5">
+                                <div class="card-body">
+                                    <p class="card-text">Precio: ${{detProd[2]}}</p>
+                                    <br>
+                                    <p class="card-text">Unidades disponibles: {{detProd[3]}}</p>
+                                    <hr>
+                                    <a href="#" class="btn btn-primary">Regresar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

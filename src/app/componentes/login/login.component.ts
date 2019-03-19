@@ -37,9 +37,7 @@ export class LoginComponent implements OnInit {
       //////////////////////// AUTENTICACIÓN CON FIREBASE ///////////////////////////////
       this.authApi.loginUser(this.form.value.email, this.form.value.password)
       .then( (res) => {
-        console.log(res);
-        console.log('BIEN');
-        this.router.navigate(['inicio']);
+        window.location.replace('./inicio');
       }).catch( (err) => {
 
         if (err.code === 'auth/user-not-found') {

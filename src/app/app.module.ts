@@ -25,6 +25,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { BarraSuperiorComponent } from './componentes/barra-superior/barra-superior.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
+import { DetalleComponent } from './componentes/detalle/detalle.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CarritoComponent } from './componentes/carrito/carrito.component';
     LoginComponent,
     InicioComponent,
     BarraSuperiorComponent,
-    CarritoComponent
+    CarritoComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
